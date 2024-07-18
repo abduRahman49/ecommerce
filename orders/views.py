@@ -1,6 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
+from django.views.decorators.http import require_http_methods
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.views import View
+from django.contrib.auth.decorators import login_required
 from .models import Produit, Client
+from .decorators import decorator
 
 
 def hello(request):
@@ -47,3 +53,40 @@ def client_infos(request, id):
         {"".join(divs)}
     """
     return HttpResponse(html)
+
+
+# @require_http_methods(["POST"])
+@decorator
+def process_test_request(request):
+    if request.method == "POST":
+        # traitement
+        pass
+    
+    if request.method == "PUT":
+        # traitement
+        pass
+
+    if request.method == "DELETE":
+        # traitement
+        pass
+    
+    return HttpResponse('You can pass')
+
+
+class HomeView(View):
+
+    def get(self, request):
+        return HttpResponse('This is get method')
+
+    @method_decorator(csrf_exempt)
+    def post(self, request):
+        print(request.POST)
+        return HttpResponse('This is post method')
+
+    @method_decorator(csrf_exempt)
+    def put(self, request):
+        return HttpResponse('This is put method')
+
+    @method_decorator(csrf_exempt)
+    def delete(self, request):
+        return HttpResponse('This is delete method')

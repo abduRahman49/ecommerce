@@ -38,10 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'orders',
+    'orders', # Application que nous avons défini
 ]
 
 MIDDLEWARE = [
+    'orders.middlewares.HeaderMiddleware', # Middleware que nous avons défini
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
