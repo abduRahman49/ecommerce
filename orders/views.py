@@ -6,7 +6,18 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from .models import Produit, Client
-from .decorators import decorator
+from .decorators import decorator, is_user_authenticated
+from datetime import datetime
+
+
+def index(request):
+    context = {
+        "nom": "abdou",
+        "class": "django",
+        "date": datetime.now(),
+        "etudiants": ["Etudiant 1", "Etudiant 2", "Etudiant 3"]
+    }
+    return render(request, "orders/index.html", context)
 
 
 def hello(request):
@@ -55,8 +66,7 @@ def client_infos(request, id):
     return HttpResponse(html)
 
 
-# @require_http_methods(["POST"])
-@decorator
+@is_user_authenticated
 def process_test_request(request):
     if request.method == "POST":
         # traitement
@@ -75,6 +85,7 @@ def process_test_request(request):
 
 class HomeView(View):
 
+    @method_decorator(is_user_authenticated)
     def get(self, request):
         return HttpResponse('This is get method')
 
@@ -90,3 +101,8 @@ class HomeView(View):
     @method_decorator(csrf_exempt)
     def delete(self, request):
         return HttpResponse('This is delete method')
+
+
+def list_products(request):
+    products = Produit.objects.all()
+    return render(request, 'orders/list_products.html', {'produits': products})

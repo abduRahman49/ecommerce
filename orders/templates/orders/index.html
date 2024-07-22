@@ -1,0 +1,35 @@
+{% extends 'base.html' %} <!-- Cette instruction permet d'hériter le contenu du template référencé -->
+{% load static %} <!-- Cette instruction permet de charger (rendre accessible) les fichiers statiques sur le template courant -->
+
+{% block customcss %} 
+<link href="{% static 'css/main.css' %}" rel="stylesheet" > <!-- L'instruction static 'path/to/css/file' permet de créer un chemin pointant vers le fichier désiré -->
+{% endblock %}
+
+{% block content %}
+    <span>Hello Django!</span>
+    {% if not user.is_authenticated %} <!-- Structure conditionnelle vérifiant la valeur d'une condition -->
+        <div class="container">
+            <p>Nom</p>
+            {{ nom | title }}
+        </div>
+        <div class="container">
+            <p>Class</p>
+            {{ class | title }} <!-- Le symbole | permet d'appliquer des traitements supplémentaires sur les variables (Ex: mise en majuscule, formattage, etc.) -->
+        </div>
+        <div class="container">
+            <p>Date</p>
+            {{ date | date:"Y-m-d" }}
+        </div>
+        <div class="container">
+            <p>Etudiants</p>
+            <ul>
+            {% for etudiant in etudiants %} <!-- Boucle permettant d'itérer sur un iterable -->
+                <li>{{ etudiant | upper }}</li> <!-- Utilisant de l'instruction {{ variable }} pour évaluer le contenu de la variable -->
+            {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <p>Vous n'êtes pas connecté, veuillez vous connecter!</p>
+    {% endif %}
+
+{% endblock %}
