@@ -106,3 +106,21 @@ class HomeView(View):
 def list_products(request):
     products = Produit.objects.all()
     return render(request, 'orders/list_products.html', {'produits': products})
+
+def get_client(request,id):
+    client = get_object_or_404(Client,pk=id)
+    commandes = client.commandes.all()
+    produits = []
+    for commande in commandes:
+        for produit in commande.produits.all():
+            produits.append(produit)
+    """
+    produits = list()
+    if client.commandes.exists():
+        orders = client.commandes.all()
+        for order in orders:
+            produits.extend(order.produits.all())
+    else:
+        orders = None
+    """
+    return render(request,'orders/catalog.html',{'client':client,'orders':commandes,'produits':produits})

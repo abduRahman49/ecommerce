@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'orders', # Application que nous avons défini
+    'authentication',
 ]
 
 MIDDLEWARE = [

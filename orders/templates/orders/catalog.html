@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="text-center">Information du client</h4>
+        </div>
+        <div class="card-body">
+            <p> {{client.username}} -- {{client.first_name}} -- {{client.last_name}} -- {{client.age}} </p>
+
+
+            <h4 class="text-center bg-info">Information des commandes</h4>
+            
+            {% for order in orders %}
+                <p>{{ order.created_at | date }}</p>
+                <p>{{ order.created_at | date }}</p>
+                {{ order.numero_commande }}
+            {% endfor %}
+
+            {% for produit in produits %}
+                <p>{{ produit.libelle }}</p>
+                <p>{{ produit.prix }}</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
