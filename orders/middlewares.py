@@ -5,7 +5,11 @@ from django.http import HttpResponseForbidden
 class HeaderMiddleware:
 
     def __init__(self, get_response):
-        # get_response correspond à la vue à exécuter par l'application
+        """Ceci est la méthode permettant d'inialiser la classe
+
+        Args:
+            get_response (view): Get response est la vue qui sera exécutée par le middleware
+        """
         self.get_response = get_response
     
 
