@@ -12,16 +12,20 @@
 
             <h4 class="text-center bg-info">Information des commandes</h4>
             
-            {% for order in orders %}
-                <p>{{ order.created_at | date }}</p>
-                <p>{{ order.created_at | date }}</p>
-                {{ order.numero_commande }}
-            {% endfor %}
+            {% if commandes %}
+                {% for commande in commandes %}
+                    <p>{{ commande.created_at | date }}</p>
+                    <p>{{ commande.numero_commande }}</p>
 
-            {% for produit in produits %}
-                <p>{{ produit.libelle }}</p>
-                <p>{{ produit.prix }}</p>
-            {% endfor %}
+                    {% for produit in produits %}
+                        <p>{{ produit.libelle }}</p>
+                        <p>{{ produit.prix }}</p>
+                    {% endfor %}
+                {% endfor %}
+
+            {% else %}
+            <p>Il n'existe pas de commande en base</p>
+            {% endif %}
         </div>
     </div>
 </div>
