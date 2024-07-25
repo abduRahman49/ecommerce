@@ -38,4 +38,4 @@ class Produit(models.Model):
 
 class Categorie(models.Model):
     libelle = models.CharField(max_length=100)
-    produits = models.ManyToManyField(Produit, null=True)
+    produits = models.ManyToManyField(Produit)
