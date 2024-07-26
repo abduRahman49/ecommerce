@@ -15,7 +15,7 @@ def signup_view(request):
             password = form.cleaned_data.get('password1') # Ici vous remarquez qu'il y a comme valeur password1, c'est parce qu'on peut demander deux champs password et les comparer (password1, password2)
             user = authenticate(username=username, password=password)
             login(request, user)
-            messages.success(request, 'Utilisateur créé avec succès')
+            messages.success(request, 'Utilisateur créé avec succès')  # Permet de générer des messages pour informer l'utilisateur de ce qui se passe derrière (Ces messages seront disponibles au niveau des templates et pourront être exploités)
             return redirect('home')
         else:
             messages.error(request, 'Les données soumises sont invalides')
