@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login, logout
-# from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetConfirmView
+# from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetConfirmView (Ce sont des vues basées sur des classes que l'on peut utiliser)
 
 
 def signup_view(request):
