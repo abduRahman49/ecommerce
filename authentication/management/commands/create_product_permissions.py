@@ -15,7 +15,7 @@ class Command(BaseCommand):
         content_type = ContentType.objects.get_for_model(Produit)
         for permission_name in permission_names:
             _, created = Permission.objects.get_or_create(
-                name=f"O-{permission_name}",
+                name=f"Can perform operation corresponding to {permission_name}",
                 content_type=content_type,
                 codename=permission_name
             )
