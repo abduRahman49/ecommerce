@@ -1,13 +1,14 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login, logout
 # from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetConfirmView
 
 
 def signup_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST) # Ce formulaire permet de créer un nouvel utilisateur
+        form = CustomUserCreationForm(request.POST) # Ce formulaire permet de créer un nouvel utilisateur
         if form.is_valid():
             form.save() # A ce niveau le hashage est géré automatiquement par Django. La méthode save de UserCreationForm va faire appel à une autre méthode set_password qui hashera le mot de passe avant de le sauvegarder
             username = form.cleaned_data.get('username')
@@ -19,7 +20,7 @@ def signup_view(request):
         else:
             messages.error(request, 'Les données soumises sont invalides')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
 
     return render(request, "authentication/register.html", {"form": form})
 
