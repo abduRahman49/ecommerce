@@ -12,15 +12,12 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         permission_names = options["permission_names"]
-        content_type = ContentType.objects.create(
-            app_label="orders",
-            model=Produit
-        )
+        content_type = ContentType.objects.get_for_model(Produit)
         for permission_name in permission_names:
             _, created = Permission.objects.get_or_create(
-                name=permission_name,
+                name=f"O-{permission_name}",
                 content_type=content_type,
-                codename=f"O-{permission_name}"
+                codename=permission_name
             )
             if not created:
                 raise CommandError(f'La permission avec le nom {permission_name} existe déjà')
